@@ -497,6 +497,11 @@ class _PinputState extends State<Pinput>
       return PinItemStateType.error;
     }
 
+    /// Submitted pin takes precedence over focused when prioritized
+    if (widget.prioritizeSubmittedOverFocused && index < selectedIndex) {
+      return PinItemStateType.submitted;
+    }
+
     if (hasFocus && index == selectedIndex.clamp(0, widget.length - 1)) {
       return PinItemStateType.focused;
     }
